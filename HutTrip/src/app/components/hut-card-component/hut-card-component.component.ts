@@ -82,6 +82,24 @@ export class HutCardComponentComponent implements OnInit, OnDestroy, OnChanges {
     return `Day ${hutIndex + 1} - ${dateStr}`;
   }
 
+  get reservationLink(): string {
+    const dateFrom = this.hut.date.toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+
+    const dateTo = new Date(this.hut.date);
+    dateTo.setDate(dateTo.getDate() + 1);
+    const dateToStr = dateTo.toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+
+    return `https://www.hut-reservation.org/reservation/book-hut/${this.hut.hut_id}/wizard?dateFrom=${dateFrom}&dateTo=${dateToStr}`;
+  }
+
   get availabilityClass(): string {
     if (this.hut.hut_id === '0') {
       return 'custom-hut';

@@ -6,7 +6,7 @@
   </div>
   <div class="card-actions">
     <a *ngIf="hut.hut_id !== '0'"
-       [href]="'https://www.hut-reservation.org/reservation/book-hut/' + hut.hut_id + '/wizard'"
+       [href]="reservationLink"
        target="_blank"
        class="reservation-link"
        aria-label="Book hut">
