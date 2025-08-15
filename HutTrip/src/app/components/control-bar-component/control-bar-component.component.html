@@ -1,5 +1,7 @@
 <ng-content></ng-content>
-<div class="control-bar">
+<div class="date-section">
   <date-picker-component (dateChange)="onDateSelected($event)"></date-picker-component>
+</div>
+<div class="search-section">
   <hut-search-component (selectHut)="onHutSelected($event)"></hut-search-component>
 </div>
