@@ -57,7 +57,21 @@ export class HutCardComponentComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   get formattedDate(): string {
-    return this.hut.date.toLocaleDateString();
+    const hutDate = new Date(this.hut.date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    hutDate.setHours(0, 0, 0, 0);
+
+    const diffTime = hutDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    const dateStr = hutDate.toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit'
+    });
+
+    return `Day ${diffDays + 1} - ${dateStr}`;
   }
 
   get availabilityClass(): string {
