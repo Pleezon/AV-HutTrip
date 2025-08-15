@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {map, Observable, shareReplay, catchError, of} from 'rxjs';
+import {map, Observable, shareReplay, catchError, of, Subject} from 'rxjs';
 
 
 export interface HutMap {
@@ -38,6 +38,8 @@ export class HutService {
   private availabilityCache: Map<string, Observable<HutAvailability>> = new Map();
   private selectedHuts: SelectedHut[] = [];
   private baseDate: Date = new Date();
+  private selectedHutsSubject = new Subject<SelectedHut[]>();
+  selectedHuts$ = this.selectedHutsSubject.asObservable();
 
   constructor(private http: HttpClient) {
     this.hutMapCache$ = this.http.get<HutMap>(this.mappingUrl).pipe(
@@ -153,6 +155,14 @@ export class HutService {
     }
   }
 
+  getSelectedHuts(): SelectedHut[] {
+    return this.selectedHuts;
+  }
+
+  private notifyHutsUpdated() {
+    this.selectedHutsSubject.next([...this.selectedHuts]);
+  }
+
   addSelectedHut(hut: Hut, baseDate: Date): void {
     this.baseDate = new Date(baseDate);
     this.baseDate.setUTCHours(0, 0, 0, 0);
@@ -163,18 +173,21 @@ export class HutService {
       date: this.getDateForPosition(this.selectedHuts.length),
     };
     this.selectedHuts.push(selectedHut);
+    this.notifyHutsUpdated();
   }
 
-  getSelectedHuts(): SelectedHut[] {
-    return this.selectedHuts;
+  updateHutOrder(newOrder: SelectedHut[]) {
+    this.selectedHuts = [...newOrder];
+    this.updateAllDates();
+    this.notifyHutsUpdated();
   }
 
   removeSelectedHut(hut: SelectedHut): void {
     const index = this.selectedHuts.indexOf(hut);
     if (index !== -1) {
       this.selectedHuts.splice(index, 1);
-      // Update dates for all huts after the removed one
       this.updateAllDates();
+      this.notifyHutsUpdated();
     }
   }
 
@@ -182,6 +195,7 @@ export class HutService {
     this.baseDate = new Date(newDate);
     this.baseDate.setUTCHours(0, 0, 0, 0);
     this.updateAllDates();
+    this.notifyHutsUpdated();
   }
 
   private updateAllDates(): void {

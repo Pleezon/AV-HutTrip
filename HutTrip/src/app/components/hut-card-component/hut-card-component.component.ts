@@ -16,15 +16,25 @@ export class HutCardComponentComponent implements OnInit, OnDestroy, OnChanges {
 
   availability?: HutAvailabilityEntry;
   private availabilitySubscription?: Subscription;
+  private lastDate?: Date;
 
   constructor(private hutService: HutService) {}
 
   ngOnInit() {
+    this.lastDate = this.hut.date;
     this.loadAvailability();
+  }
+
+  ngDoCheck() {
+    if (this.lastDate?.getTime() !== this.hut.date.getTime()) {
+      this.lastDate = this.hut.date;
+      this.loadAvailability();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['hut'] && !changes['hut'].firstChange) {
+      this.lastDate = this.hut.date;
       this.loadAvailability();
     }
   }
@@ -57,21 +67,19 @@ export class HutCardComponentComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   get formattedDate(): string {
-    const hutDate = new Date(this.hut.date);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    hutDate.setHours(0, 0, 0, 0);
-
-    const diffTime = hutDate.getTime() - today.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
+    const hutDate = this.hut.date;
     const dateStr = hutDate.toLocaleDateString('de-DE', {
       day: '2-digit',
       month: '2-digit',
       year: '2-digit'
     });
 
-    return `Day ${diffDays + 1} - ${dateStr}`;
+    // Get the hut's position from the service to determine the day number
+    const hutIndex = this.hutService.getSelectedHuts().findIndex(h =>
+      h.hut_id === this.hut.hut_id && h.date.getTime() === this.hut.date.getTime()
+    );
+
+    return `Day ${hutIndex + 1} - ${dateStr}`;
   }
 
   get availabilityClass(): string {

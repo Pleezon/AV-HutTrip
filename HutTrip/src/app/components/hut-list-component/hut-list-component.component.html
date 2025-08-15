@@ -1,7 +1,9 @@
-<div class="selected-huts">
+<div class="selected-huts" cdkDropList (cdkDropListDropped)="onDrop($event)">
   <hut-card-component
     *ngFor="let hut of selectedHuts"
     [hut]="hut"
     (remove)="removeHut(hut)"
+    cdkDrag
+    class="drag-item"
   ></hut-card-component>
 </div>

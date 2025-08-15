@@ -1,6 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'date-picker-component',
@@ -11,8 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class DatePickerComponentComponent {
   @Output() dateChange = new EventEmitter<string>();
-
-  selectedDate: string = new Date().toISOString().split('T')[0];
+  mindate: string = new Date().toISOString().split('T')[0];
+  selectedDate: string = this.mindate
   disabled = false;
 
   constructor() {
