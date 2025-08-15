@@ -4,7 +4,16 @@
     <div class="hut-date">{{ formattedDate }}</div>
     <div class="hut-availability">{{ availabilityText }}</div>
   </div>
-  <button class="remove-hut" (click)="onRemove()" aria-label="Remove hut">
-    ✕
-  </button>
+  <div class="card-actions">
+    <a *ngIf="hut.hut_id !== '0'"
+       [href]="'https://www.hut-reservation.org/reservation/book-hut/' + hut.hut_id + '/wizard'"
+       target="_blank"
+       class="reservation-link"
+       aria-label="Book hut">
+      🏠
+    </a>
+    <button class="remove-hut" (click)="onRemove()" aria-label="Remove hut">
+      ✕
+    </button>
+  </div>
 </div>

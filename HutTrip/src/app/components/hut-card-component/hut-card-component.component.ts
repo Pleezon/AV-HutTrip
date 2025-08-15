@@ -104,7 +104,7 @@ export class HutCardComponentComponent implements OnInit, OnDestroy, OnChanges {
 
   get availabilityText(): string {
     if (this.hut.hut_id === '0') {
-      return 'Custom hut';
+      return 'Hut not in system';
     }
     if (!this.availability) {
       return 'Loading availability...';
