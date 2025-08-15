@@ -1,0 +1,10 @@
+<div class="hut-card" [ngClass]="availabilityClass">
+  <div class="hut-info">
+    <div class="hut-title">{{ hut.name }}</div>
+    <div class="hut-date">{{ formattedDate }}</div>
+    <div class="hut-availability">{{ availabilityText }}</div>
+  </div>
+  <button class="remove-hut" (click)="onRemove()" aria-label="Remove hut">
+    ✕
+  </button>
+</div>

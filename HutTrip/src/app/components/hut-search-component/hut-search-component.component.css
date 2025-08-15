@@ -1,0 +1,90 @@
+.search-input-container {
+  position: relative;
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #2d3748;
+  background-color: #fff;
+  transition: border-color 0.2s, background-color 0.2s;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.search-input:disabled {
+  background-color: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-result-item:hover {
+  background-color: #f0f0f0;
+}
+
+.hut-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.search-controls {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.add-custom-button {
+  padding: 8px 16px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-custom-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.add-custom-button:hover:not(:disabled) {
+  background-color: #5a6268;
+}

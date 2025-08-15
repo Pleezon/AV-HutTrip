@@ -1,0 +1,26 @@
+<div class="search-input-container" (clickOutside)="showResults = false">
+  <div class="search-controls">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search for a hut..."
+      [disabled]="disabled"
+      [(ngModel)]="searchQuery"
+      (input)="onSearchInput()"
+      (focus)="showResults = true"
+    >
+    <button class="add-custom-button" (click)="onAddCustom()" [disabled]="!searchQuery.trim()">
+      Add custom
+    </button>
+  </div>
+
+  <div class="search-results" *ngIf="showResults && searchResults.length > 0">
+    <div
+      class="search-result-item"
+      *ngFor="let hut of searchResults"
+      (click)="onHutSelect(hut)"
+    >
+      <span class="hut-name">{{ hut.name }}</span>
+    </div>
+  </div>
+</div>

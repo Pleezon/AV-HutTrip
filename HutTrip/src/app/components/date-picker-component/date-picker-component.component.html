@@ -1,0 +1,8 @@
+<input
+  type="date"
+  class="date-input"
+  [disabled]="disabled"
+  [(ngModel)]="selectedDate"
+  (ngModelChange)="onDateChange()"
+  [min]="selectedDate"
+>

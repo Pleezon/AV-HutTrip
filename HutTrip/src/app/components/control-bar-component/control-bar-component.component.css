@@ -1,0 +1,37 @@
+:host {
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.search-section {
+  flex: 3;
+  position: relative;
+}
+
+.date-section {
+  width: 200px;
+  flex: none;
+}
+
+.control-bar {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+}
+
+@media screen and (max-width: 650px) {
+  :host {
+    flex-direction: column;
+  }
+
+  .search-section,
+  .date-section {
+    width: 100%;
+  }
+}

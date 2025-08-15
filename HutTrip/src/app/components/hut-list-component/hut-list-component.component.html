@@ -1,0 +1,7 @@
+<div class="selected-huts">
+  <hut-card-component
+    *ngFor="let hut of selectedHuts"
+    [hut]="hut"
+    (remove)="removeHut(hut)"
+  ></hut-card-component>
+</div>

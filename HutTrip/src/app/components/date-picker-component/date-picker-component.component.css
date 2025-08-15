@@ -1,0 +1,25 @@
+.date-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  color: #2d3748;
+  background-color: #fff;
+  transition: border-color 0.2s, background-color 0.2s;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.date-input:disabled {
+  background-color: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
