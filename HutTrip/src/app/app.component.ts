@@ -16,5 +16,6 @@ import { HutListComponentComponent } from './components/hut-list-component/hut-l
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'HutTrip';
+  title = 'Hut Trip Planner';
+  desc='Plan your perfect mountain adventure'
 }
